@@ -1,0 +1,26 @@
+﻿@model IEnumerable<User>
+
+@{
+    ViewData["Title"] = "Find Friends";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Find Friends</h1>
+
+<table class="table">
+
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                <form asp-controller="Home" asp-action="CreatePrivate" asp-route-UserID="@item.Id" method="post">
+                    <input type="submit" class="btn btn-info" name="name" value="Private Chat" />
+                </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Chat>
+
+
+<div id="viewport">
+    <!-- Sidebar -->
+    <div id="sidebar">
+        @foreach (var item in Model)
+        {
+            if (item.Type == Helper.ChatType.Room)
+            {
+                <header>
+                    <a asp-controller="Home" asp-action="Chat" asp-route-ChatID="@item.ID">@item.Name</a>
+                </header>
+            }
+            else
+            {
+                string Name = item.ChatUsers.FirstOrDefault(x => x.UserID != User.FindFirst(ClaimTypes.NameIdentifier).Value).User.UserName;
+                <header>
+                    <a asp-controller="Home" asp-action="Chat" asp-route-ChatID="@item.ID">@Name</a>
+                </header>
+            }
+
+        }
+    </div>
+</div>
